@@ -2,12 +2,15 @@
 const sendToken = (user,statusCode,res)=>{
     
      console.log('user:', user);
-
     console.log('JWT_SECRET:', process.env.JWT_SECRET);
   console.log('JWT_EXPIRES_TIME:', process.env.JWT_EXPIRES_TIME);
 
     //create Jwt token
     const token = user.getJwtToken();
+    
+    console.log("jwttoken",getJwtToken );
+    console.log("token",token);
+
 
     //options for cookie
     const options = {
