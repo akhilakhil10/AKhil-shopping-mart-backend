@@ -17,8 +17,7 @@ const sendToken = (user,statusCode,res)=>{
         expires: new Date(
             Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
         ),
-        httpOnly: true,
-        domain: '.onrender.com' 
+        httpOnly: true
 
     };
     console.log(token);
@@ -29,7 +28,8 @@ const sendToken = (user,statusCode,res)=>{
         token,
         user
     });
-  
+          localStorage.setItem('token',token,options)
+
 }
 
 module.exports = sendToken;
