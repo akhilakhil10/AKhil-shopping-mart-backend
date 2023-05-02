@@ -105,6 +105,10 @@ exports.updateOrder = catchAsyncErrors(async(req,res,next)=>{
 async function updateStock(id,quantity){
     const product = await Product.findById(id);
 
+    if(product.stock===0){
+        product.stock==10}
+    else{
+    
     product.stock = product.stock - quantity;
 
     await product.save({validateBeforeSave:false})
