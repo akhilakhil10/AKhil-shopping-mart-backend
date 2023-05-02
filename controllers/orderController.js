@@ -110,7 +110,7 @@ async function updateStock(id,quantity){
     else{
     
     product.stock = product.stock - quantity;
-
+    }
     await product.save({validateBeforeSave:false})
 }
 
