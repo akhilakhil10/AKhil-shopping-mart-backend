@@ -74,8 +74,10 @@ exports.forgetPassword = catchAsyncErrors(async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
     await user.save({ validateBeforeSave: false });https://akhil-shopping-mart.onrender.com
 
+    
     //Reset password URL
-    const resetUrl = `https://akhil-shopping-mart.onrender.com/password/reset/${resetToken}`;
+    
+    const resetUrl = `${process.env.MY_RESET_URL}/${resetToken}`;
 
     const message = `your password reset token is a follow:\n\n${resetUrl}\n\nIf you have not requested this email,then ignore it `
 
