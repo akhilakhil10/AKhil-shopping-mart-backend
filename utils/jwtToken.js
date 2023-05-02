@@ -1,25 +1,25 @@
-const sendToken = (user, statusCode, req, res) => {
-  // Create JWT token
-  const token = user.getJwtToken();
+//create and send token and save in the cookie
+const sendToken = (user,statusCode,res)=>{
 
-  // Set cookie options
-  const options = {
-    expires: new Date(Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000),
-    httpOnly: true,
-    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
-  };
+    //create Jwt token
+    const token = user.getJwtToken();
 
-  // Set the token value as a cookie in the response
-  res.cookie('token', token, options);
-  
-  localStorage.setItem('token', token);
-
-  // Send the response with the token value and user information
-  res.status(statusCode).json({
-    success: true,
-    token,
-    user,
-  });
-};
+    //options for cookie
+    const options = {
+        expires: new Date(
+            Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
+        ),
+        httpOnly: true
+    };
+    console.log(token);
+   
+    res.status(statusCode).cookie('token',token,options).json({
+        
+        success:true,
+        token,
+        user
+    });
+}
 
 module.exports = sendToken;
+
