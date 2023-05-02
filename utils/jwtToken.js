@@ -1,6 +1,9 @@
 //create and send token and save in the cookie
 const sendToken = (user,statusCode,res)=>{
 
+    console.log('JWT_SECRET:', process.env.JWT_SECRET);
+  console.log('JWT_EXPIRES_TIME:', process.env.JWT_EXPIRES_TIME);
+
     //create Jwt token
     const token = user.getJwtToken();
 
@@ -21,7 +24,7 @@ const sendToken = (user,statusCode,res)=>{
         token,
         user
     });
-    localStorage.setItem('token', token);
+  
 }
 
 module.exports = sendToken;
