@@ -9,6 +9,6 @@ const {
 const { isAuthenticatedUser } = require('../middlewares/auth')
 
 router.route('/payment/process').post(isAuthenticatedUser, processPayment);
-router.route('/stripeapi').get(isAuthenticatedUser, sendStripApi);
+router.route('/stripeapi').get(sendStripApi);
 
 module.exports = router;
