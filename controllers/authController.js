@@ -206,8 +206,6 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
         expires: new Date(Date.now()),
         httpOnly: true
     })
-     // Remove the token from local storage
-  localStorage.removeItem('token');
     res.status(200).json({
         success: true,
 
