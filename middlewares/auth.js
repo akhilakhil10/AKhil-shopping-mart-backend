@@ -7,8 +7,12 @@ const ErrorHandler = require('../utils/errorHandler')
 
 exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1];
+  if (!authHeader) {
+    // Skip authentication middleware if Authorization header is not present
+    return next();
+  }
 
+  const token = authHeader.split(' ')[1];
   if (!token) {
     return next(new ErrorHandler('Login first to access this resource.', 401));
   }
@@ -17,6 +21,7 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   req.user = await User.findById(decoded.id);
   next();
 });
+
 //Handling user roles
 exports.authorizeRoles = (...roles) => {
     return (req, res, next) => {
