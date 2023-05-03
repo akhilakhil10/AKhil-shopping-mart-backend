@@ -5,22 +5,18 @@ const ErrorHandler = require('../utils/errorHandler')
 
 
 
-// Checks if user is authenticated or not
 exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
 
-    const { token } = req.cookies
-    
-    console.log("token in authmiddleware",token);
+  if (!token) {
+    return next(new ErrorHandler('Login first to access this resource.', 401));
+  }
 
-    if (!token) {
-        return next(new ErrorHandler('Login first to access this resource.', 401))
-    }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    req.user = await User.findById(decoded.id);
-
-    next()
-})
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  req.user = await User.findById(decoded.id);
+  next();
+});
 //Handling user roles
 exports.authorizeRoles = (...roles) => {
     return (req, res, next) => {
