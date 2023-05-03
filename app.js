@@ -14,7 +14,12 @@ const erroeMiddleware = require('./middlewares/error')
 // dotenv.config({ path: 'config/config.env' })
 dotenv.config({ path: '/etc/secrets/config.env' })
   
-app.use(cors())
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(cookieparser());
