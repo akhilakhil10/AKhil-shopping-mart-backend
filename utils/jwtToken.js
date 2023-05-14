@@ -15,6 +15,8 @@ const sendToken = (user,statusCode,res)=>{
         expires: new Date(
             Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
         )
+           };
+    console.log(token);
  res.status(200).json({
     success: true,
     token,
