@@ -22,6 +22,7 @@ try {
     token,
     user,
   });
+    console.log("token--",token,"token sent");
 } catch (err) {
   console.error('Error generating JWT token:', err.message);
   next(new ErrorHandler('Internal server error', 500));
