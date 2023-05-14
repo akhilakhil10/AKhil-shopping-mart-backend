@@ -19,6 +19,7 @@ const sendToken = (user,statusCode,res)=>{
           domain: 'onrender.com'
 
     };
+    res.cookie('token', token, options);
     console.log(token);
    
     res.status(statusCode).cookie('token',token,options).json({
