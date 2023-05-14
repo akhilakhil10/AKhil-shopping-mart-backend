@@ -14,6 +14,7 @@ try {
     expires: new Date(Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000),
     domain: '.onrender.com'
   };
+    console.log(process.env.COOKIE_EXPIRES_TIME,"---cookei expire time");
   // set cookie in response
   res.cookie('token', token, options);
   // send response with token
